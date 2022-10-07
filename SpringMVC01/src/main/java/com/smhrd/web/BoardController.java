@@ -54,4 +54,13 @@ public class BoardController {
 		return "boardList";
 		
 	}
+	
+	@RequestMapping("/boardForm.do")
+	public String boardForm(Model model) {
+		
+		
+		
+		return "boardForm";
+	}
+	
 }

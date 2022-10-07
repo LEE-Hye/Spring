@@ -67,6 +67,8 @@
 					</tr>
 					</c:forEach>
 				</table>
+				<!-- 버튼을 누르면 boardForm.jsp로 이동 -->
+				<button class="btn btn-sm btn-success" onclick="location.href='boardForm.do'">글작성</button>
 			</div>
 			<div class="panel-footer">A강의장 이혜빈</div>
 		</div>

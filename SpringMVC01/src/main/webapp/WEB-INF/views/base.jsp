@@ -16,7 +16,8 @@
   <h2>Spring MVC01</h2>
     <div class="panel panel-warning">
       <div class="panel-heading">Spring 게시판 만들기</div>
-      <div class="panel-body">Panel Content</div>
+      	<div class="panel-body">
+		</div>
       <div class="panel-footer">A강의장 이혜빈</div>
     </div>
 </div>
