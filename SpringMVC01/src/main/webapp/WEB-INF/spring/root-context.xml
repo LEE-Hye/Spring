@@ -1,8 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+  xsi:schemaLocation="
+  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- 
+		IoC 제어 역전 구조?
 		
+		Board board = new Board(); 랑 똑같이 쓴거
+		(-> 내가 써서 써야해
+		bean은 알려주기만 하면 스프링에서 실행해줌)
+		board.setTitle("안녕");
+		
+		결합도를 낮추기 위해서 bean사용
+	 -->
+	<bean id="board" class="com.smhrd.entity.Board">
+	    <!-- name은 필드의 이름 / value "안녕"부분 -->
+		<property name="title" value="안녕">	</property>
+	</bean>
+	
+	<!-- DB연결 생성에 필요한 정보들을 묶어줄 객체 생성 -->
+	<bean id="config" class = "com.zaxxer.hikari.HikariConfig">
+	    <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+	    <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/mysql"></property>
+	    <property name="username" value="root"></property>
+	    <property name="password" value="12345"></property>
+	</bean>
+	
+	<!-- connection pool을 만들고 관리할 객체 -->
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+	    <constructor-arg ref="config"></constructor-arg>
+	</bean>
+	
+	<!-- DBCP와 mapper interface를 이용해 구현체를 만들어줄 객체 -->
+	<!-- id 딱히 안 줘도 상관 없음. 이 아이디는 클래스 맨 마지막 것 맨 앞글자만 소문자로 바꿔서 적었음 별 의미 없음 -->
+	<bean id ="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+	    <property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+	<mybatis:scan base-package="com.smhrd.mapper"></mybatis:scan>
 </beans>

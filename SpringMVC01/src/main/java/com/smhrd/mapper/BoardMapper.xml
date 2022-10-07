@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smhrd.mapper.BoardMapper">
+    
+    <!-- 
+	    delete/insert/update 는 int로만 나옴
+		select 는 어떤 테이블을 어떤 규칙을 이용해서 조회했는가에 따라 결과가 항상 달라서 
+		=> result타입을 적어줘야 함
+		메서드 명 == id
+	-->
+    <select id="boardList" resultType="com.smhrd.entity.Board">
+        select * from board
+    </select>
+    
+    
+</mapper>
