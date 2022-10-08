@@ -46,7 +46,7 @@
 							<td>${board.indate}</td>
 						</tr>
 				</table>
-				<button class="btn btn-sm btn-info" onclick="location.href='boardModify.do'">수정</button>
+				<button class="btn btn-sm btn-info" onclick="location.href='boardUpdate.do?idx=${board.idx}'">수정</button>
 				<button class="btn btn-sm btn-warning" onclick="location.href='boardDelete.do?idx=${board.idx}'">삭제</button>
 				<button class="btn btn-sm btn-success" onclick="location.href='boardList.do'">목록</button>
 			</div>

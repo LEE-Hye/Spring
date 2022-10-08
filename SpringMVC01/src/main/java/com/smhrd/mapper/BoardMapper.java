@@ -3,6 +3,7 @@ package com.smhrd.mapper;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.smhrd.entity.Board;
@@ -26,5 +27,14 @@ public interface BoardMapper {
 	
 	public Board boardContent(int idx);
 	
+	// @Delete("Delete from borad where idx = #{idx}") 이렇게 적어줘도 xml에 sql문 적은것과 같은 역할을 함
+	// 대신 주의할 점이 xml에도 boardDelete가 있으면 안된다
+	@Delete("Delete from board where idx = #{idx}")
 	public int boardDelete(int idx);
+	
+	public Board boardUpdateForm(int idx);
+
+	// 파라미터 타입과 같은 Board가 들어가야 한다.
+	public int boardUpdate(Board board);
+
 }

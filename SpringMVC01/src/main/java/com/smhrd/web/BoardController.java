@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -116,16 +118,39 @@ public class BoardController {
 	}
 	
 	@RequestMapping("boardDelete.do")
-	public String boardDelete(@RequestParam int idx) {
+	public String boardDelete(int idx) {
 		
 		mapper.boardDelete(idx);
 		
 		return "redirect:/boardList.do";
 	}
 	
-	@RequestMapping("boardModify.do")
-	public String boardModify() {
+
+	// boardUpdate.do에서 이동하기도 하면서 다른 기능도 하는 2가지 일이 일어나면 오류가 난다.
+	// 근데 같은 url이라도 get과 post 방식 각각 사용한다면 오류가 나지 않는다.
+	// get방식을 요청하면 doGet() 요청이 일어나고/ post방식을 요청하면 doPost() 요청이 일어난다.
+	
+	// @request 는 get이든 post든 상관 없이 서비스가 일어난다고 생각하면 됨
+	
+	// update.jsp로 이동하려는 요청
+	// Get방식으로 요청할때만 실행
+	@GetMapping("/boardUpdate.do")
+	public String boardUpdateForm(@RequestParam int idx, Model model) {
 		
-		return "boardModify";
+		Board board = mapper.boardUpdateForm(idx);
+		
+		model.addAttribute("board", board);
+		
+		return "boardUpdate";
+	}
+	
+	// 게시글을 수정하고 다음페이지로 가는 요청
+	// Post방식으로 요청할때만 실행
+	@PostMapping("/boardUpdate.do")
+	public String boardUpdate(Board board) {
+		
+		mapper.boardUpdate(board);
+		
+		return "redirect:/boardContent.do?idx="+board.getIdx();
 	}
 }

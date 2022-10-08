@@ -27,8 +27,13 @@
         where idx=#{idx}
     </select>
     
-    <delete id="boardDelete" parameterType="com.smhrd.entity.Board">
-        delete from board
+    <select id="boardUpdateForm" resultType="com.smhrd.entity.Board">
+        select * from board
         where idx=#{idx}
-    </delete>
+    </select>
+    
+    <update id="boardUpdate" parameterType="com.smhrd.entity.Board" >
+        update board set title=#{title}, writer=#{writer} ,content=#{content}
+        where idx=#{idx}
+    </update>
 </mapper>
