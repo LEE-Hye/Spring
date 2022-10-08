@@ -9,8 +9,26 @@
 		메서드 명 == id
 	-->
     <select id="boardList" resultType="com.smhrd.entity.Board">
+        <!-- 필드의 이름과 데이터베이스 컬럼명이 같아야 한다 -->
         select * from board
     </select>
     
+    <insert id="boardInsert" parameterType="com.smhrd.entity.Board">
+        insert into board(title, writer, content)
+        values(#{title}, #{writer}, #{content})
+    </insert>
     
+    <!-- 
+    	#{}쓰면 파라미터 타입도 받아줘야 함
+    	근데 데이터가 딱 한 개만 있다면 선택지가 없어 굳이 써줄필요 없음
+    -->
+    <select id="boardContent" resultType="com.smhrd.entity.Board">
+        select * from board
+        where idx=#{idx}
+    </select>
+    
+    <delete id="boardDelete" parameterType="com.smhrd.entity.Board">
+        delete from board
+        where idx=#{idx}
+    </delete>
 </mapper>

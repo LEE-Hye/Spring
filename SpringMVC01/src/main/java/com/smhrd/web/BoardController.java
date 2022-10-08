@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smhrd.entity.Board;
 import com.smhrd.mapper.BoardMapper;
@@ -57,10 +58,74 @@ public class BoardController {
 	
 	@RequestMapping("/boardForm.do")
 	public String boardForm(Model model) {
-		
-		
-		
+
 		return "boardForm";
 	}
 	
+	@RequestMapping("boardInsert.do")
+	public String boardInsert(Board board) {
+		// 1. 기본 생성자가 존재한다.
+		// 2. 필드의 변수명과 input태그의 name값이 같다.
+		// -> 자동으로 파라미터 수집이 가능하다.
+		// -> 매개변수에 결과로 묶일 데이터 타입이나 변수를 넣어주면 된다.
+		
+		// data(파라미터) 수집
+		// 제목, 작성자, 내용
+		/*
+		String title = request.getParameter("title");
+		String writer = request.getParameter("writer");
+		String content = request.getParameter("content");
+		
+		Board board = new Board();
+		board.setTitle(title);
+		board.setWriter(writer);
+		board.setContent(content);
+		*/
+		
+
+		
+		// Mapper들에 SQL문 정의
+		
+		
+		// insert기능 사용
+		mapper.boardInsert(board);
+		
+		// 다음 페이지로
+		// 다시 pojo인 컨트롤러로 돌아와야 하는 경우에 redirect 사용
+		// redirect:/ 를 urlmapping 앞에 붙이면 된다
+		return "redirect:/boardList.do";
+		// return "boardList.do"; 
+		// -> WEB-INF/vies/boardList.do.jsp
+	}
+	
+	@RequestMapping("boardContent.do")
+	public String boardContent(@RequestParam int idx, Model model) {
+		// Board board에도 가져올 idx가 있지만 딱 한개만 불러오기에는 크기 때문에
+		// DTO를 사용하지 않고 그냥 변수로도 파라미터 수집이 가능하다.
+		// 변수명 == name => int idx
+		// 변수명 != name => @RequestParam("idx") int idx : requestparameter에 있는 값 중 idx를 꺼내서 변수 idx에 저장해라
+		
+		Board board = mapper.boardContent(idx);
+		// mapper안에 있는 boardContent를 쓰겠다. 
+		// => 이 결과값이 필요하기 때문에 Board board에 담아준다.
+		
+		model.addAttribute("board", board);
+		// 위에서 가져온 값을 사용하기 위해서 model에 추가 시켜줌
+		
+		return "boardContent";
+	}
+	
+	@RequestMapping("boardDelete.do")
+	public String boardDelete(@RequestParam int idx) {
+		
+		mapper.boardDelete(idx);
+		
+		return "redirect:/boardList.do";
+	}
+	
+	@RequestMapping("boardModify.do")
+	public String boardModify() {
+		
+		return "boardModify";
+	}
 }

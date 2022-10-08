@@ -1,5 +1,6 @@
 package com.smhrd.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -21,4 +22,9 @@ public interface BoardMapper {
 	// DAO가 데이터 엑세스 오브젝트(구현이 다 된 오브젝트)인데 의미가 사라졌어
 	// -> 그래서 이름을 Mapper로 바꿔
 
+	public int boardInsert(Board board);
+	
+	public Board boardContent(int idx);
+	
+	public int boardDelete(int idx);
 }
