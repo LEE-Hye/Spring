@@ -21,6 +21,7 @@
 			<div class="panel-heading">Spring 게시판 만들기</div>
 			<div class="panel-body">
 				<form class="form-horizontal" action="boardUpdate.do" method="post">
+				<!-- action에서 바로 쿼리스트링으로 보내줘도 되고 인풋 타입으로 겉으로는 보이지 않게 idx를 보내줄 수도 있다 -->
 				<input type="hidden" value="${board.idx }" name="idx">
 					<div class="form-group">
 						<label class="control-label col-sm-2" for="title">title:</label>
