@@ -101,7 +101,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("boardContent.do")
-	public String boardContent(@RequestParam int idx, Model model) {
+	public String boardContent(@RequestParam("idx") int idx, Model model) {
 		// Board board에도 가져올 idx가 있지만 딱 한개만 불러오기에는 크기 때문에
 		// DTO를 사용하지 않고 그냥 변수로도 파라미터 수집이 가능하다.
 		// 변수명 == name => int idx
@@ -134,8 +134,8 @@ public class BoardController {
 	
 	// update.jsp로 이동하려는 요청
 	// Get방식으로 요청할때만 실행
-	@GetMapping("/boardUpdate.do")
-	public String boardUpdateForm(@RequestParam int idx, Model model) {
+	@GetMapping("/boardUpdate.do") // 버전 4번대부터 사용할 수 있음
+	public String boardUpdateForm(int idx, Model model) {
 		
 		Board board = mapper.boardUpdateForm(idx);
 		
