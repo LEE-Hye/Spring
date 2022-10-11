@@ -149,8 +149,14 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="SpringMVC01" path="/web" reloadable="true" source="org.eclipse.jst.jee.server:SpringMVC01"/>
-      <Context docBase="SpringMVC02" path="/web2" reloadable="true" source="org.eclipse.jst.jee.server:SpringMVC02"/></Host>
+        <!-- 
+        	같은 프로젝트 복붙 해서 에러나는 경우 
+        	1. 서버에서 하나 삭제하던가 
+        	2. 여기서 context-path를 다른 폴더명(컨텍스트명)으로 바꿔준다.
+        	두 번째 방법이 더 안 좋다. 
+        -->
+      
+      <Context docBase="SpringMVC02" path="/web" reloadable="true" source="org.eclipse.jst.jee.server:SpringMVC02"/></Host>
     </Engine>
   </Service>
 </Server>

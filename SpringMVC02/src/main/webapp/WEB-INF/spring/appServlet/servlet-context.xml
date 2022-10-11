@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+	<!-- webapp 안에 있는 resources 안에 있는 것을 찾겠다. -->
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	<!-- 
+		InternalResourceViewResolver aaa = new InternalResourceViewResolver(); => 객체 생성
+			-> bean class에 적혀있는 문장이 이거 하라고 한 것이다.
+		property에 적혀있는 첫번째 건 aaa.setPrefix("/WEB-INF/views/"); => 이거를 집어넣어 주겠다.
+	 -->
+	
+	<!-- POJO들이 들어있는 패키지를 scan -->
+	<context:component-scan base-package="com.smhrd.web" />
+	<!-- 
+		얘는 꼭 있어야 해
+		com.smhrd.web 패키지를 훑어보겠다.(처음 프로젝트 만들 때 적은 패키지 이름)
+			-> 이름을 바꿔주면 여기도 반드시 바꿔주러 와야 한다.
+		-> 훑어 보는 이유는 scan을 통해서 패키지 안에 컨트롤러인 pojo를 찾기 위해서이다.
+		pojo들이 들어있는 패키지가 여러개면 scan 여러번 해도 된다.(대신 느려짐)
+	 -->
+	
+	
+</beans:beans>
