@@ -122,5 +122,10 @@ public class BoardRestController { // 비동기 관련된 처리를 할 POJO
 		mapper.boardDelete(idx);
 
 	}
+	
+	@RequestMapping("boardInsert.do")
+	public void boardInsert(Board board) {
+		mapper.boardInsert(board);
+	}
 
 }

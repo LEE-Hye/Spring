@@ -146,7 +146,15 @@
 			// form태그 안에 작성한 값을 직렬화 해서 가져온다
 			var frmData = $("#frm").serialize();
 			
-			console.log(frmData)
+			$.ajax({
+				url : 'boardInsert.do',
+				type : 'post', // 길이 문제때매 post를 적는게 좋다.
+				data : frmData,
+				success : boardList,
+				error : function(){
+					alert("error");
+				}
+			})
 		}
 		
 	</script>
