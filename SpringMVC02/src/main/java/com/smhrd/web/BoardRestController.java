@@ -115,5 +115,12 @@ public class BoardRestController { // 비동기 관련된 처리를 할 POJO
 		return list;
 		
 	}
+	
+	@RequestMapping("boardDelete.do")
+	public void boardDelete(int idx) {
+		
+		mapper.boardDelete(idx);
+
+	}
 
 }
